@@ -11,7 +11,7 @@ export class NavMenuComponent implements OnInit {
 
   isProduction: boolean = false;
 
-  ngOnInit() : void {
+  ngOnInit(): void {
     this.isProduction = environment.production;
   }
 

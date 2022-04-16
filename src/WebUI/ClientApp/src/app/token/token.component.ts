@@ -14,7 +14,7 @@ export class TokenComponent implements OnInit {
 
   faCopy = faCopy;
 
-  constructor(private authorizeService: AuthorizeService) {}
+  constructor(private authorizeService: AuthorizeService) { }
 
   ngOnInit(): void {
     this.isCopied = false;

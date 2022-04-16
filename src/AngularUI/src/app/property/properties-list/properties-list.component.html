@@ -1,0 +1,66 @@
+<header>
+  <h1 class="header-1">This is  list of houses</h1>
+</header>
+<div class="textanime">
+  <a class="header-1">This is  list of houses</a>
+</div>
+
+<div class="row">
+  <div class="offset-10 col-md-2">
+    <a [routerLink]="['/prop/create']">Create Property</a>
+
+  </div>
+</div>
+<br>
+
+
+
+
+
+
+<div *ngIf="!proprietes" >
+      <a>Loading ...</a>
+</div>
+
+<div class="col-md-12">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Item</th>
+      <th scope="col">Item</th>
+      <th>Details</th>
+      <th>Update</th>
+       <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of proprietes | paginate:{
+      itemsPerPage: 10,
+      currentPage: pageNumber,
+      totalItems: totalCount
+    }">
+      <th scope="row">{{item.id}}</th>
+      <td>{{ item.title }}</td>
+      <td>{{ item.askedPrice }}</td>
+      <td><button type="button" id="details" class="btn btn-light"  (click)="getPropertyDetails(item.id)">Details</button></td>
+      <td><button type="button" id="update" class="btn btn-success">Update</button></td>
+      <td><button type="button" id="delete" class="btn btn-danger">Delete</button></td>
+    </tr>
+  </tbody>
+</table>
+
+<pagination-controls
+            class="pagi"
+            [maxSize]="maxSize"
+              [directionLinks]="directionLinks"
+              [autoHide]="autoHide"
+              [responsive]="responsive"
+  (pageChange)="GetData($event,itemsPerPage)"
+></pagination-controls>
+
+
+
+
+
+</div>

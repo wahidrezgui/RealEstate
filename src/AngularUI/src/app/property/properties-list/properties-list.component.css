@@ -1,0 +1,37 @@
+
+
+
+header .header-1{
+  background-image: radial-gradient(#553c9a, #ee4b2b);
+}
+
+
+.textanime {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.textanime a {
+  font-size: 1rem;
+  font-weight: 200;
+  color: #553c9a;
+  border-right: 1px solid #000;
+  animation: cursor 0.5s infinite step-end, typing 15s infinite steps(16);
+  white-space: nowrap;
+  overflow: hidden;
+}
+@keyframes cursor{
+  0%, 100%{border-color: transparent;}
+  50%{border-color: #000;}
+}
+
+@keyframes typing{
+  0%{ width: 0ch} /*Text is hidden*/
+  30%{ width: 17ch;} /*The enitre header will be typed out*/
+  80%{ width: 17ch;} /*Text stays visible*/
+  90%{ width: 0ch;} /*Text is deleted*/
+  100%{ width: 0ch;} /*Text stays hidden*/
+}

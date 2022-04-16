@@ -1,0 +1,50 @@
+/*--------------------------------------------------------------
+# Footer
+--------------------------------------------------------------*/
+.section-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  background: #f3f3f3;
+}
+.section-footer-paragraph {
+  flex: 1;
+  padding: 0.5em;
+}
+
+.section-footer ul {
+  line-height: 2;
+}
+.section-footer .item-list-a i {
+  font-size: 18px;
+  padding-right: 4px;
+  color: #2eca6a;
+}
+.widget-a .w-title-a {
+  margin-bottom: 1rem;
+}
+
+footer {
+  display: flex;
+  background: #f3f3f3;
+  text-align: center;
+  padding: 30px 0;
+}
+.socials {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+footer .copyright-footer {
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+}
+footer .credits {
+  font-size: 14px;
+}
+
+@media (max-width: 767px) {
+  .section-footer {
+    flex-direction: column;
+  }
+}

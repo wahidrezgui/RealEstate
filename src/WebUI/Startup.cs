@@ -5,7 +5,10 @@ using CleanArchitecture.Infrastructure.Persistence;
 using CleanArchitecture.WebUI.Filters;
 using CleanArchitecture.WebUI.Services;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.Net.Http.Headers;
 using NSwag;
 using NSwag.Generation.Processors.Security;
 
@@ -42,12 +45,20 @@ public class Startup
         services.AddRazorPages();
 
         // Customise default API behaviour
-        services.Configure<ApiBehaviorOptions>(options => 
+        services.Configure<ApiBehaviorOptions>(options =>
             options.SuppressModelStateInvalidFilter = true);
 
         // In production, the Angular files will be served from this directory
-        services.AddSpaStaticFiles(configuration => 
+        services.AddSpaStaticFiles(configuration =>
             configuration.RootPath = "ClientApp/dist");
+
+        //for uploading photo
+        services.Configure<FormOptions>(o =>
+        {
+            o.ValueLengthLimit = int.MaxValue;
+            o.MultipartBodyLengthLimit = int.MaxValue;
+            o.MemoryBufferThreshold = int.MaxValue;
+        });
 
         services.AddOpenApiDocument(configure =>
         {
@@ -81,7 +92,28 @@ public class Startup
 
         app.UseHealthChecks("/health");
         app.UseHttpsRedirection();
+
         app.UseStaticFiles();
+
+        app.UseStaticFiles(new StaticFileOptions()
+        {
+            FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
+            RequestPath = new PathString("/Resources")
+        });
+        app.UseStaticFiles(new StaticFileOptions()
+        {
+            OnPrepareResponse = preparation =>
+            {
+                var headers = preparation.Context.Response.GetTypedHeaders();
+                headers.CacheControl = new CacheControlHeaderValue
+                {
+                    Public = true,
+                    MaxAge = TimeSpan.FromDays(2)
+                };
+                headers.Expires = new DateTimeOffset(DateTime.UtcNow.AddDays(2));
+            }
+        });
+
         if (!env.IsDevelopment())
         {
             app.UseSpaStaticFiles();
@@ -108,15 +140,15 @@ public class Startup
 
         app.UseSpa(spa =>
         {
-                // To learn more about options for serving an Angular SPA from ASP.NET Core,
-                // see https://go.microsoft.com/fwlink/?linkid=864501
+            // To learn more about options for serving an Angular SPA from ASP.NET Core,
+            // see https://go.microsoft.com/fwlink/?linkid=864501
 
-                spa.Options.SourcePath = "ClientApp";
+            spa.Options.SourcePath = "ClientApp";
 
             if (env.IsDevelopment())
             {
-                    //spa.UseAngularCliServer(npmScript: "start");
-                    spa.UseProxyToSpaDevelopmentServer(Configuration["SpaBaseUrl"] ?? "http://localhost:4200");
+                //spa.UseAngularCliServer(npmScript: "start");
+                spa.UseProxyToSpaDevelopmentServer(Configuration["SpaBaseUrl"] ?? "http://localhost:4200");
             }
         });
     }

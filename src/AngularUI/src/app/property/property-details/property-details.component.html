@@ -1,0 +1,111 @@
+<div class="card card-body bg-light mb-2 mt-2">
+  <div class="row">
+    <div class="col-md-3">
+      <strong>property name:</strong>
+    </div>
+    <div class="col-md-3">
+      {{property?.title}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <strong>Description:</strong>
+    </div>
+    <div class="col-md-3">
+      {{property?.description }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <strong>CurrentPrice:</strong>
+    </div>
+    <div class="col-md-3">
+      {{property?.currentPrice }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <strong>askedPrice:</strong>
+    </div>
+    <div class="col-md-3">
+      {{property?.askedPrice }}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+      <strong>bedroom:</strong>
+    </div>
+    <div class="col-md-3">
+      {{property?.bedroom }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <strong>bathroom:</strong>
+    </div>
+    <div class="col-md-3">
+      {{property?.bathroom }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <strong>garage:</strong>
+    </div>
+    <div class="col-md-3">
+      {{property?.garage }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <strong>lotArea:</strong>
+    </div>
+    <div class="col-md-3">
+      {{property?.lotArea }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <strong>coveredArea:</strong>
+    </div>
+    <div class="col-md-3">
+      {{property?.coveredArea }}
+    </div>
+  </div>
+
+
+
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+
+     <div #conteiner>
+
+      <ul>
+        <li *ngFor="let pic of propertyImages">
+          <a href="#">
+            <img src="{{serverpath}}{{pic}}" >
+          </a>
+        </li>
+
+      </ul>
+  </div>
+</div>
+<div>
+  <div class="row">
+    <div class="col-md-offset-8 col-md-1">
+      <button type="submit" class="btn btn-info" (click)="deleteOwner()">Delete</button>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="row">
+  <app-map-location> </app-map-location>
+</div>
+
+<app-error-modal [modalHeaderText]="'Error message'"
+  [modalBodyText]="'error Message'"
+  [okButtonText]="'OK'"></app-error-modal>

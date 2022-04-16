@@ -32,6 +32,18 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, 
 
     public DbSet<TodoItem> TodoItems => Set<TodoItem>();
 
+    public DbSet<Propriete> Proprietes => Set<Propriete>();
+
+    public DbSet<Governorate> Governorates => Set<Governorate>();
+
+    public DbSet<Municipalite> Municipalites => Set<Municipalite>();
+
+    public DbSet<PhotoNotaire> PhotosNotaire => Set<PhotoNotaire>();
+
+    public DbSet<PhotoProperty> PhotosProperty => Set<PhotoProperty>();
+
+    public DbSet<Notaire> Notaires => Set<Notaire>();
+
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
     {
         foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
